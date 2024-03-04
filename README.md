@@ -1,12 +1,12 @@
-This folder contains MATLAB code to replicate an updated version of Example 3 (Dynamic Discrete Choice) in the paper "Locally Robust Semiparametric Estimation" (Chernozhukov et al., 2022; subsection 3.2).
+This repository contains MATLAB code to replicate an updated version of Example 3 (Dynamic Discrete Choice) in the paper "Locally Robust Semiparametric Estimation" (Chernozhukov et al., 2022; subsection 3.2).
 
-DEPENDENCIES (MATLAB):
+# DEPENDENCIES (MATLAB)
 1. Statistics and Machine Learning Toolbox
 2. Optimization Toolbox
 3. Symbolic Math Toolbox
 4. "All Permutations of integers with sum criteria" (Bruno Luong, 2024)
 
-INSTRUCTIONS FOR REPLICATING THE TABLES:
+# INSTRUCTIONS FOR REPLICATING THE TABLES
 1. Run solve_Markov_DP.m, which will solve the Markov decision problem.
     * This will use value iteration to solve an  "integrated Bellman equation" and will then plug the resulting "integrated value function" into a logit formula to
       get the conditional choice probablity function (for replacement), which is saved in cond_prob_repl_fn.m.
@@ -26,7 +26,7 @@ INSTRUCTIONS FOR REPLICATING THE TABLES:
 
 5. Run maketables.m (in the "Results" directory) to format the results as tables.
 
-CORRECTIONS FOR THE PAPER:
+# CORRECTIONS FOR THE PAPER
 1. The constant in H() should be Euler's constant. (The 2s and the 7 are the wrong way around.)
 
 2. The bottom of page 1513 should say that there are 20 choices for gamma_1_ll'.
@@ -39,11 +39,11 @@ CORRECTIONS FOR THE PAPER:
 5. alpha_2 has two components corresponding to the two components of D, respectively.
    The conditional expectation of it in the formula for alpha_1 should actually be the sum of the two components of that conditional expectation.
 
-CHANGES TO THE EXAMPLE 3 SETUP:
+# CHANGES TO THE EXAMPLE 3 SETUP
 1. For the Markov transitions, the shock is now drawn from a different mixture distribution: 1+z times a half-normal with variance 1, where z denotes SUM_k {c_k * X_t,k+1}.
 
 2. The static component of the per-period utility function is now sqrt(1+a) rather than sqrt(a).
 
-REFERENCES:
+# REFERENCES
 1. Bruno Luong (2024). All Permutations of integers with sum criteria
 (https://www.mathworks.com/matlabcentral/fileexchange/17818-all-permutations-of-integers-with-sum-criteria), MATLAB Central File Exchange. Retrieved January 15, 2024.
