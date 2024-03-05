@@ -43,26 +43,26 @@ William Liu (liuw@mit.com) 2024
 * Original project by Ben Deaner (bdeaner@mit.edu or bendeaner@gmail.com) 2020
 
 ### CHANGES FROM ORIGINAL PROJECT
-1. For the Markov transitions, the shock is now drawn from a different mixture distribution: 1+z times a half-normal with variance 1, where z denotes SUM_k {c_k * X_t,k+1}.
+1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{t,k+1}$.
 
-2. The static component of the per-period utility function is now sqrt(1+a) rather than sqrt(a).
+2. The static component of the per-period utility function is now $\sqrt{1+m}$ rather than $\sqrt{m}$, where $m$ denotes mileage.
 
 3. Fixed code errors and numerical accuracy issues.
 
 4. Number of Monte Carlo draws increased to 1000.
 
 ### ERRORS IN THE PAPER
-1. The constant in H() should be Euler's constant. (The 2s and the 7 are the wrong way around.)
+1. The constant in $H$ should be Euler's constant. (The 2s and the 7 are the wrong way around.)
 
-2. The bottom of page 1513 should say that there are 20 choices for gamma_1_ll'.
-   This is because l and l' must be distinct (which is implied but not stated explicitly).
+2. The bottom of page 1513 should say that there are 20 choices for $\gamma_{1,ll'}$.
+   This is because $l$ and $l'$ must be distinct (which is implied but not stated explicitly).
 
-3. The expression for phi_1 should contain X_t+1 and Y_2t+1 instead of X_t and Y_2t.
+3. The expression for $\phi_1$ should contain $X_{t+1}$ and $Y_{2,t+1}$ instead of $X_t$ and $Y_{2,t}$.
 
-4. The expression for phi_3 should contain Y_1t instead of Y_2t.
+4. The expression for $\phi_3$ should contain $Y_{1,t}$ instead of $Y_{2,t}$.
 
-5. alpha_2 has two components corresponding to the two components of D, respectively.
-   The conditional expectation of it in the formula for alpha_1 should actually be the sum of the two components of that conditional expectation.
+5. $\alpha_2$ has two components corresponding to the two components of $D$, respectively.
+   The conditional expectation of it in the formula for $\alpha_1$ should actually be the sum of the two components of that conditional expectation.
 
 # REFERENCES
 1. Chernozhukov, V., Escanciano, J.C., Ichimura, H., Newey, W.K. and Robins, J.M. (2022), Locally Robust Semiparametric Estimation. Econometrica, 90: 1501-1535. https://doi.org/10.3982/ECTA16294
