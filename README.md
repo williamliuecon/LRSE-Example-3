@@ -1,32 +1,57 @@
-This repository contains MATLAB code to replicate an updated version of Example 3 (Dynamic Discrete Choice) in the paper "Locally Robust Semiparametric Estimation" (Chernozhukov et al., 2022; subsection 3.2).
+This repository contains code for a remake of Example 3 (Dynamic Discrete Choice) in the paper "Locally Robust Semiparametric Estimation" (Chernozhukov et al., 2022; subsection 3.2).
 
-# DEPENDENCIES (MATLAB)
+# INSTRUCTIONS
+1. Make sure dependencies 1-3 are installed. (Dependency 4 is included in this repository.)
+
+2. Run solve_Markov_DP.m, which will solve the Markov decision problem.
+   * This will use value iteration to solve an  "integrated Bellman equation" and will then plug the resulting "integrated value function" into a logit formula to
+      get the conditional choice probablity function (for replacement), which is saved in cond_prob_repl_fn.m.
+
+3. Run get_stdist.m, which will get the stationary distribution of the Markov process for the engine mileage.
+   * This runs the Markov process for many burn-in periods, saving the subsequent observations in stdist_draws.mat.
+
+4. Set the variable "sample_size" and then run gen_data.m, which will generate the simulation datasets.
+   In the paper, the sample sizes reported are 100, 300, 1000, and 10000; the script must be run separately for each of these sample sizes.
+
+5. Set the variables "sample_size" and "spec" and then run estimate.m, which will calculate estimates using the simulation datasets.
+   You can set "sample_size" to be 100, 300, 1000, or 10000 and "spec" to be 1, 1.5, 2, 3, or 4; the script must be run separately for each possible pair of values.
+
+6. Run maketables.m (in the "Results" directory) to format the results as tables.
+
+### DEPENDENCIES (MATLAB)
 1. Statistics and Machine Learning Toolbox
 2. Optimization Toolbox
 3. Symbolic Math Toolbox
 4. "All Permutations of integers with sum criteria" (Bruno Luong, 2024)
 
-# INSTRUCTIONS FOR REPLICATING THE TABLES
-1. Run solve_Markov_DP.m, which will solve the Markov decision problem.
-    * This will use value iteration to solve an  "integrated Bellman equation" and will then plug the resulting "integrated value function" into a logit formula to
-      get the conditional choice probablity function (for replacement), which is saved in cond_prob_repl_fn.m.
-    * Example batch script for running on a computing cluster: LRSE_DP.sbatch.
+### COMPUTING CLUSTER SUPPORT
+Steps 2-5 can be run on a HPC cluster and are written in a way that assumes doing so (although, they can be modified to run locally).
+Using a HPC cluster is particularly useful for steps 4-5, which require running scripts multiple times;
+LRSE_data.sbatch and LRSE_est.sbatch will use a Slurm job array to automatically create separate jobs for each choice.
 
-2. Run get_stdist.m, which will get the stationary distribution of the Markov process for the engine mileage.
-    * This runs the Markov process for many burn-in periods, saving the subsequent observations in stdist_draws.mat.
-    * Example batch script for running on a computing cluster: LRSE_stdist.sbatch.
+Batch files for running on a HPC cluster are provided:
+* LRSE_DP.sbatch
+* LRSE_stdist.sbatch
+* LRSE_data.sbatch
+* LRSE_est.sbatch
 
-3. Set the variable "sample_size" and then run gen_data.m, which will generate the simulation datasets.
-   In the paper, the sample sizes reported are 100, 300, 1000, and 10000; the script must be run separately for each of these sample sizes.
-    * Example batch script for running on a computing cluster: LRSE_data.sbatch.
+Simply change the parameters in these batch files to fit your system and run them as with any Slurm batch job. The job array number corresponds to sample size (step 4) or sample size and specification pair (step 5).
 
-4. Set the variables "sample_size" and "spec" and then run estimatenew.m in order to estimate parameters using the simulated data.
-   You can set "sample_size" to be 100, 300, 1000, or 10000 and "spec" to be 1, 1.5, 2, 3, or 4; the script must be run separately for each possible pair of values.
-    * Example batch script for running on a computing cluster: LRSE_est.sbatch.
+# NOTES
+### AUTHOR
+William Liu (liuw@mit.com) 2024
+* Original project by Ben Deaner (bdeaner@mit.edu or bendeaner@gmail.com) 2020
 
-5. Run maketables.m (in the "Results" directory) to format the results as tables.
+### CHANGES FROM ORIGINAL PROJECT
+1. For the Markov transitions, the shock is now drawn from a different mixture distribution: 1+z times a half-normal with variance 1, where z denotes SUM_k {c_k * X_t,k+1}.
 
-# CORRECTIONS FOR THE PAPER
+2. The static component of the per-period utility function is now sqrt(1+a) rather than sqrt(a).
+
+3. Fixed code errors and numerical accuracy issues.
+
+4. Number of Monte Carlo draws increased to 1000.
+
+### ERRORS IN THE PAPER
 1. The constant in H() should be Euler's constant. (The 2s and the 7 are the wrong way around.)
 
 2. The bottom of page 1513 should say that there are 20 choices for gamma_1_ll'.
@@ -39,11 +64,8 @@ This repository contains MATLAB code to replicate an updated version of Example 
 5. alpha_2 has two components corresponding to the two components of D, respectively.
    The conditional expectation of it in the formula for alpha_1 should actually be the sum of the two components of that conditional expectation.
 
-# CHANGES TO THE EXAMPLE 3 SETUP
-1. For the Markov transitions, the shock is now drawn from a different mixture distribution: 1+z times a half-normal with variance 1, where z denotes SUM_k {c_k * X_t,k+1}.
-
-2. The static component of the per-period utility function is now sqrt(1+a) rather than sqrt(a).
-
 # REFERENCES
-1. Bruno Luong (2024). All Permutations of integers with sum criteria
+1. Chernozhukov, V., Escanciano, J.C., Ichimura, H., Newey, W.K. and Robins, J.M. (2022), Locally Robust Semiparametric Estimation. Econometrica, 90: 1501-1535. https://doi.org/10.3982/ECTA16294
+
+2. Bruno Luong (2024). All Permutations of integers with sum criteria
 (https://www.mathworks.com/matlabcentral/fileexchange/17818-all-permutations-of-integers-with-sum-criteria), MATLAB Central File Exchange. Retrieved January 15, 2024.
