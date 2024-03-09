@@ -1,7 +1,7 @@
 This repository contains code for a remake of Example 3 (Dynamic Discrete Choice) in the paper "Locally Robust Semiparametric Estimation" (Chernozhukov et al., 2022; subsection 3.2).
 
 # INSTRUCTIONS
-1. Make sure dependencies 1-3 are installed. (Dependency 4 is included in this repository.)
+1. Make sure dependencies 1-3 are installed. If doing parallel computing, also install dependency 4. (Dependency 5 is included in this repository.)
 
 2. Run solve_Markov_DP.m, which will solve the Markov decision problem.
    * This will use value iteration to solve an  "integrated Bellman equation" and will then plug the resulting "integrated value function" into a logit formula to
@@ -22,7 +22,8 @@ This repository contains code for a remake of Example 3 (Dynamic Discrete Choice
 1. Statistics and Machine Learning Toolbox
 2. Optimization Toolbox
 3. Symbolic Math Toolbox
-4. "All Permutations of integers with sum criteria" (Bruno Luong, 2024)
+4. Parallel Computing Toolbox
+5. "All Permutations of integers with sum criteria" (Bruno Luong, 2024)
 
 ### COMPUTING CLUSTER SUPPORT
 Steps 2-5 can be run on a HPC cluster and are written in a way that assumes doing so (although, they can be modified to run locally).
@@ -43,9 +44,10 @@ William Liu (liuw@mit.com) 2024
 * Original project by Ben Deaner (bdeaner@mit.edu or bendeaner@gmail.com) 2020
 
 ### CHANGES FROM ORIGINAL PROJECT
-1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{t,k+1}$.
+1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{k+1,t}$.
 
-2. The static component of the per-period utility function is now $\sqrt{1+m}$ rather than $\sqrt{m}$, where $m$ denotes mileage.
+2. The static component of the per-period utility function is now $\sqrt{1+X_{1t}}$ rather than $\sqrt{X_{1t}}$, where $X_{1t}$ denotes mileage.
+   This also means that $D_2(X_t) = (0, \sqrt{1+X_{1t}})'$
 
 3. Fixed code errors and numerical accuracy issues.
 
@@ -63,6 +65,8 @@ William Liu (liuw@mit.com) 2024
 
 5. $\alpha_2$ has two components corresponding to the two components of $D$, respectively.
    The conditional expectation of it in the formula for $\alpha_1$ should actually be the sum of the two components of that conditional expectation.
+
+6. $D_1(X_t)$ should equal $(1, 0)'$ rather than $(-1, 0)'$
 
 # REFERENCES
 1. Chernozhukov, V., Escanciano, J.C., Ichimura, H., Newey, W.K. and Robins, J.M. (2022), Locally Robust Semiparametric Estimation. Econometrica, 90: 1501-1535. https://doi.org/10.3982/ECTA16294
