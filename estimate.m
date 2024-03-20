@@ -13,23 +13,27 @@
 clear
 rng("default")  % Need to have a fixed seed because the lasso cross-validation introduces randomness
 
-%* For HPC cluster
-parpool("local", str2double(getenv("SLURM_CPUS_PER_TASK")))
-task_id = str2double(getenv("SLURM_ARRAY_TASK_ID"));
-value_set = { ...
-    [1, 100], [1.5, 100], [2, 100], [3, 100], [4, 100], ...
-    [1, 300], [1.5, 300], [2, 300], [3, 300], [4, 300],  ...
-    [1, 1000], [1.5, 1000], [2, 1000], [3, 1000], [4, 1000],  ...
-    [1, 10000], [1.5, 10000], [2, 10000], [3, 10000], [4, 10000] ...
-};
-value = value_set{task_id};
-spec = value(1);
-sample_size = value(2);
-
 %* Code parameters
+%// For running on a HPC cluster
+% parpool("local", str2double(getenv("SLURM_CPUS_PER_TASK")))
+% task_id = str2double(getenv("SLURM_ARRAY_TASK_ID"));
+% value_set = { ...
+%     [1, 100], [1.5, 100], [2, 100], [3, 100], [4, 100], ...
+%     [1, 300], [1.5, 300], [2, 300], [3, 300], [4, 300],  ...
+%     [1, 1000], [1.5, 1000], [2, 1000], [3, 1000], [4, 1000],  ...
+%     [1, 10000], [1.5, 10000], [2, 10000], [3, 10000], [4, 10000] ...
+% };
+% value = value_set{task_id};
+% spec = value(1);
+% sample_size = value(2);
+
+%// For running locally
+parpool("local", 6)  % Set to however many cores you want to use for parallel computing
+spec = 1;            % Set to 1, 1.5, 2, 3, or 4
+sample_size = 100;   % Set to 100, 300, 1000, or 10000
+
+%// For both
 rule_of_thumb = 1;  % Set this to 1 to use rule-of-thumb penalty parameters instead of cross-fitting
-% spec = 1;
-% sample_size = 1000;
 periods = 10;
 delta = 0.9;  % Discount factor
 splitnum = 5;  % Number of folds to use for cross-fitting
