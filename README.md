@@ -66,7 +66,7 @@ William Liu (liuw@mit.com) 2024
 5. $\alpha_2$ has two components corresponding to the two components of $D$, respectively.
    The conditional expectation of it in the formula for $\alpha_1$ should actually be the sum of the two components of that conditional expectation.
 
-6. $D_1(X_t)$ should equal $(1, 0)'$ rather than $(-1, 0)'$
+6. $D_1(X_t)$ should equal $(1, 0)'$ rather than $(-1, 0)'$.
 
 # REFERENCES
 1. Chernozhukov, V., Escanciano, J.C., Ichimura, H., Newey, W.K. and Robins, J.M. (2022), Locally Robust Semiparametric Estimation. Econometrica, 90: 1501-1535. https://doi.org/10.3982/ECTA16294
