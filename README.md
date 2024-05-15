@@ -44,7 +44,7 @@ William Liu (liuw@mit.com) 2024
 * Original project by Ben Deaner (bdeaner@mit.edu or bendeaner@gmail.com) 2020
 
 ### CHANGES FROM ORIGINAL PROJECT
-1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{k+1,t}$.
+1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{k+1,t}$. The discrete i.i.d. variables remain $\textrm{Bernoulli}(0.5)$, but the continuous i.i.d. variables are now variance-one uniform rather than chi-squared with one degree of freedom.
 
 2. The static component of the per-period utility function is now $\sqrt{1+X_{1t}}$ rather than $\sqrt{X_{1t}}$, where $X_{1t}$ denotes mileage.
    This also means that $D_2(X_t) = (0, \sqrt{1+X_{1t}})'$
