@@ -44,29 +44,28 @@ William Liu (liuw@mit.com) 2024
 * Original project by Ben Deaner (bdeaner@mit.edu or bendeaner@gmail.com) 2020
 
 ### CHANGES FROM ORIGINAL PROJECT
-1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{k+1,t}$. The discrete i.i.d. variables remain $\mathrm{Bernoulli}(0.5)$, but the continuous i.i.d. variables are now variance-one uniform rather than chi-squared with one degree of freedom.
+1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{k+1,t}$. The discrete i.i.d. variables remain $\mathrm{Bernoulli}(0.5)$, but the distribution of the continuous i.i.d. variables is now $U(0, \sqrt{12})$ (variance-one uniform) rather than $\chi^2_1$.
 
 2. The static component of the per-period utility function is now $\sqrt{1+X_{1t}}$ rather than $\sqrt{X_{1t}}$, where $X_{1t}$ denotes mileage.
    This also means that $D_2(X_t) = (0, \sqrt{1+X_{1t}})'$.
 
-3. Fixed code errors and numerical accuracy issues.
+3. Fixed formula errors and numerical accuracy issues.
 
 4. Number of Monte Carlo draws increased to 1000.
 
 ### ERRORS IN THE PAPER
-1. The constant in $H$ should be Euler's constant. (The 2s and the 7 are the wrong way around.)
+1. The expression for $\phi_1$ should contain $X_{t+1}$ and $Y_{2,t+1}$ instead of $X_t$ and $Y_{2,t}$.
 
-2. The bottom of page 1513 should say that there are 20 choices for $\gamma_{1,ll'}$.
+2. The expression for $\phi_3$ should contain $Y_{1,t}$ instead of $Y_{2,t}$.
+
+3. The constant in $H$ should be Euler's constant. (The 2s and the 7 are the wrong way around.)
+
+4. The bottom of page 1513 should say that there are 20 choices for $\gamma_{1,ll'}$.
    This is because $l$ and $l'$ must be distinct (which is implied but not stated explicitly).
 
-3. The expression for $\phi_1$ should contain $X_{t+1}$ and $Y_{2,t+1}$ instead of $X_t$ and $Y_{2,t}$.
+5. $D_1(X_t)$ should equal $(1, 0)'$ rather than $(-1, 0)'$.
 
-4. The expression for $\phi_3$ should contain $Y_{1,t}$ instead of $Y_{2,t}$.
-
-5. $\alpha_2$ has two components corresponding to the two components of $D$, respectively.
-   The conditional expectation of it in the formula for $\alpha_1$ should actually be the sum of the two components of that conditional expectation.
-
-6. $D_1(X_t)$ should equal $(1, 0)'$ rather than $(-1, 0)'$.
+6. $\hat{a}$ should have $\tilde{\theta}_l$ as an argument, not $\hat{\theta}_l$ (which does not exist).
 
 # REFERENCES
 1. Chernozhukov, V., Escanciano, J.C., Ichimura, H., Newey, W.K. and Robins, J.M. (2022), Locally Robust Semiparametric Estimation. Econometrica, 90: 1501-1535. https://doi.org/10.3982/ECTA16294
