@@ -49,7 +49,7 @@ William Liu (liuw@mit.com) 2024
 2. The static component of the per-period utility function is now $\sqrt{1+X_{1t}}$ rather than $\sqrt{X_{1t}}$, where $X_{1t}$ denotes mileage.
    This also means that $D_2(X_t) = (0, \sqrt{1+X_{1t}})'$.
 
-3. Fixed formula errors and numerical accuracy issues.
+3. Fixed incorrect-formula coding errors and numerical accuracy issues.
 
 ### ERRORS IN THE PAPER
 1. The expression for $\phi_1$ should contain $X_{t+1}$ and $Y_{2,t+1}$ instead of $X_t$ and $Y_{2,t}$.
