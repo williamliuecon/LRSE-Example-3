@@ -51,8 +51,6 @@ William Liu (liuw@mit.com) 2024
 
 3. Fixed formula errors and numerical accuracy issues.
 
-4. Number of Monte Carlo draws increased to 1000.
-
 ### ERRORS IN THE PAPER
 1. The expression for $\phi_1$ should contain $X_{t+1}$ and $Y_{2,t+1}$ instead of $X_t$ and $Y_{2,t}$.
 
