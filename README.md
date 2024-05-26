@@ -44,12 +44,16 @@ William Liu (liuw@mit.com) 2024
 * Original project by Ben Deaner (bdeaner@mit.edu or bendeaner@gmail.com) 2020
 
 ### CHANGES FROM ORIGINAL PROJECT
-1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{k+1,t}$. The discrete i.i.d. variables remain $\mathrm{Bernoulli}(0.5)$, but the distribution of the continuous i.i.d. variables is now $U(0, \sqrt{12})$ (variance-one uniform) rather than $\chi^2_1$.
+1. For the Markov transitions, the shock is now drawn from a different mixture distribution: $1+z$ times a half-normal with variance 1, where $z$ denotes $\sum\limits_{k=1}^{4} c_k X_{k+1,t}$. The discrete i.i.d. variables remain $\mathrm{Bernoulli}(0.5)$, but the distribution of the continuous i.i.d. variables is now $U(0, \sqrt{12})$ (variance-one uniform) rather than $\chi^2_1$. (In addition, the number of i.i.d. variables went down to 4 from 5.)
 
 2. The static component of the per-period utility function is now $\sqrt{1+X_{1t}}$ rather than $\sqrt{X_{1t}}$, where $X_{1t}$ denotes mileage.
    This also means that $D_2(X_t) = (0, \sqrt{1+X_{1t}})'$.
 
-3. Fixed incorrect-formula coding errors and numerical accuracy issues.
+3. Fixed incorrectly coded formulae.
+
+4. Improved numerical accuracy.
+
+5. Extensive code optimization.
 
 ### ERRORS IN THE PAPER
 1. The expression for $\phi_1$ should contain $X_{t+1}$ and $Y_{2,t+1}$ instead of $X_t$ and $Y_{2,t}$.
